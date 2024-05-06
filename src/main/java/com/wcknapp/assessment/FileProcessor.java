@@ -5,6 +5,7 @@ import com.wcknapp.assessment.model.AddressModel;
 import com.wcknapp.assessment.model.AddressResponseModel;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -25,25 +26,28 @@ public class FileProcessor {
 
     public List<String> processFile(String fileName) {
         logger.info("Processing file: " + fileName);
+        var format = CSVFormat.Builder.create(CSVFormat.DEFAULT)
+                .setHeader("street", "city", "zip")
+                .setSkipHeaderRecord(true)
+                .setIgnoreSurroundingSpaces(true)
+                .build();
 
         try (Reader reader = new FileReader(fileName)) {
-            var format = CSVFormat.Builder.create(CSVFormat.DEFAULT)
-                    .setHeader("street", "city", "zip")
-                    .setSkipHeaderRecord(true)
-                    .setIgnoreSurroundingSpaces(true)
-                    .build();
-
             CSVParser parser = new CSVParser(reader, format);
 
             return parser.stream()
-                    .map(record -> new AddressModel(record.get("street"), record.get("city"), record.get("zip")))
-                    .map(this::correctAddress)
+                    .map(this::processLine)
                     .collect(Collectors.toList());
         } catch (Exception e) {
             logger.error("Error processing file: " + fileName, e);
         }
 
         return List.of();
+    }
+
+    private String processLine(CSVRecord record) {
+        var address = new AddressModel(record.get("street"), record.get("city"), record.get("zip"));
+        return correctAddress(address);
     }
 
     private String correctAddress(AddressModel address) {

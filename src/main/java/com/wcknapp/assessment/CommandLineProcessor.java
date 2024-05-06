@@ -22,7 +22,7 @@ public class CommandLineProcessor implements CommandLineRunner {
             throw new IllegalArgumentException("Too many arguments provided");
         }
 
-        var results = processor.processFile(args[0]);
-        results.forEach(System.out::println);
+        processor.processFile(args[0])
+                .forEach(System.out::println);
     }
 }
