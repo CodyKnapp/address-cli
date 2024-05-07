@@ -1,4 +1,4 @@
-package com.wcknapp.assessment;
+package com.wcknapp.assessment.processor;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;

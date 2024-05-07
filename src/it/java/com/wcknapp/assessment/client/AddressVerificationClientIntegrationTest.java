@@ -1,4 +1,4 @@
-package com.wcknapp.assessment;
+package com.wcknapp.assessment.client;
 
 import com.wcknapp.assessment.client.AddressVerificationClient;
 import com.wcknapp.assessment.model.AddressModel;

@@ -1,5 +1,7 @@
-package com.wcknapp.assessment;
+package com.wcknapp.assessment.processor;
 
+import com.wcknapp.assessment.processor.CommandLineProcessor;
+import com.wcknapp.assessment.processor.FileProcessor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

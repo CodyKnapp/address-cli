@@ -1,9 +1,10 @@
-package com.wcknapp.assessment;
+package com.wcknapp.assessment.processor;
 
 import com.wcknapp.assessment.client.AddressVerificationClient;
 import com.wcknapp.assessment.model.AddressModel;
 import com.wcknapp.assessment.model.AddressResponseModel;
 import com.wcknapp.assessment.model.Components;
+import com.wcknapp.assessment.processor.FileProcessor;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
