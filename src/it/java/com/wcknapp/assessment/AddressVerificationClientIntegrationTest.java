@@ -3,16 +3,24 @@ package com.wcknapp.assessment;
 import com.wcknapp.assessment.client.AddressVerificationClient;
 import com.wcknapp.assessment.model.AddressModel;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@ActiveProfiles("test")
+@SpringBootTest
 class AddressVerificationClientIntegrationTest {
+
+    @Autowired
+    private AddressVerificationClient subject;
+
     @Test
     public void VerifyAddressShouldReturnEmptyOptionalWhenAddressIsInvalid() {
-        var subject = new AddressVerificationClient();
         var invalidAddress = new AddressModel("1 Empora St", "Title", "11111");
 
         var result = subject.verifyAddress(invalidAddress);
@@ -22,7 +30,6 @@ class AddressVerificationClientIntegrationTest {
 
     @Test
     public void VerifyAddressShouldReturnCorrectAddressWhenAddressIsValid() {
-        var subject = new AddressVerificationClient();
         var validAddress = new AddressModel("800 N High St", "Columbus", "43215");
 
         var result = subject.verifyAddress(validAddress);

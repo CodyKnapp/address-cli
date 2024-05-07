@@ -24,6 +24,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+}
+
 testing {
     suites {
         test {
@@ -38,6 +42,9 @@ testing {
             sources {
                 java {
                     srcDir 'src/it/java'
+                }
+                resources {
+                    srcDir 'src/it/resources'
                 }
             }
 
